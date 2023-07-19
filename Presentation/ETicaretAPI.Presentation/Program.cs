@@ -1,5 +1,6 @@
+using ETicaretAPI.Application.Validators.Products;
 using ETicaretAPI.Persistence;
-
+using FluentValidation.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +10,7 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.Al
 .AllowAnyMethod()
 
 ));
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<CreateProductValidator>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
